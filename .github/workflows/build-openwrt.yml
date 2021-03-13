@@ -230,17 +230,17 @@ jobs:
       run: |
         cd openwrt
         if [[ ${{matrix.target}} =~ (Lede_phicomm_n1|Project_phicomm_n1) ]]; then
-          source "${PATH1}/common.sh" && Diy_n1
-         cd out
-         for x in ${devices[*]}; do
-           cd $x
-           filename=$(ls | awk -F '.img' '{print $1}')
-           gzip *.img
-           cd ../
-           echo "firmware_$x=$filename" >> $GITHUB_ENV
-         done
-           cd ../../
-           mv -f reform/out/*/*.img.gz openwrt/bin/targets/armvirt/*
+          cd ../
+          svn co https://github.com/1980Add/N1/trunk
+          cp trunk/common1.sh ./
+          cp trunk/mk_openwrt_src_20210312.tar.gz ./
+          source "common1.sh" && Diy_n1
+          cd ${GITHUB_WORKSPACE}/opt/openwrt/tmp
+          filename=$(ls | awk -F '.img' '{print $1}')
+          gzip *.img
+          mv -f *.img.gz ${GITHUB_WORKSPACE}/openwrt/bin/targets/armvirt/*
+          cd ../../../
+          echo "firmware_phicomm_n1=$filename" >> $GITHUB_ENV
         fi
     
     - name: 整理固件文件夹
