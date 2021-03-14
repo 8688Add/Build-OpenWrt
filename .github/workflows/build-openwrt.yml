@@ -236,7 +236,6 @@ jobs:
           cp trunk/mk_openwrt_src_20210312.tar.gz ./
           source "common1.sh" && Diy_n1
           cd ${GITHUB_WORKSPACE}/opt/openwrt/tmp
-          sudo cp /workdir/openwrt/bin/targets/armvirt/64/openwrt-armvirt-64-default-rootfs.tar.gz /opt/openwrt
           filename=$(ls | awk -F '.img' '{print $1}')
           gzip *.img
           mv -f *.img.gz ${GITHUB_WORKSPACE}/openwrt/bin/targets/armvirt/*
