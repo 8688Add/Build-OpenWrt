@@ -232,9 +232,9 @@ jobs:
         if [[ ${{matrix.target}} =~ (Lede_phicomm_n1|Project_phicomm_n1) ]]; then
           cd ../
           svn co https://github.com/1980Add/N1/trunk
-          cp trunk/common1.sh ./
-          cp trunk/mk_openwrt_src_20210312.tar.gz ./
-          source "common1.sh" && Diy_n1
+          cp trunk/common2.sh ./
+          cp trunk/mk_openwrt_src_20210327.tar.gz ./
+          source "common2.sh" && Diy_n1
           cd ${GITHUB_WORKSPACE}/opt/openwrt/tmp
           filename=$(ls | awk -F '.img' '{print $1}')
           gzip *.img
